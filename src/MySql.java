@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
         private String dataBaseName;
         private String host;
         private String url;
+       private  String table_name;
         public Connection conexion = null;
        
         
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
             user = "root";//comunmente el user es root
             pw = "mysql";//la clave
             dataBaseName = "bdfcaiceo";//nombre de la base de datos
+            table_name="datosfcaiceo";
             host = "localhost";
             url = "jdbc:mysql://" + host + "/" + dataBaseName;   
             Conectar();
@@ -37,12 +39,16 @@ import javax.swing.JOptionPane;
             System.out.println("Conexion off");
         }
    
-      public void insertData(String table_name, String rut, String name)
+      public void insertData(String rut, String name , String apellido,String salario )
       {
+          System.out.println("entro");
         try {
             String Query = "INSERT INTO " + table_name + " VALUES("
                     + "\"" + rut + "\", "
-                    + "\"" + name + "\")";
+                    + "\"" + name + "\", "
+                    + "\"" + apellido + "\", "
+                     + "\"" + Integer.parseInt(salario) + "\");";
+            System.out.println(Query);
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
            
@@ -53,7 +59,7 @@ import javax.swing.JOptionPane;
         }
       
 
-       public void SelectData(String table_name)
+       public void SelectData()
       {
             try
             {
@@ -98,9 +104,9 @@ import javax.swing.JOptionPane;
       
 
     
-      public void deleteRecord(String table_name, String ID) {
+      public void deleteRecord( String ID) {
         try {
-            String Query = "DELETE FROM " + table_name + " WHERE ID = \"" + ID + "\"";
+            String Query = "DELETE FROM " + table_name + " WHERE RUT = \"" + ID + "\"";
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
 
@@ -109,7 +115,7 @@ import javax.swing.JOptionPane;
             JOptionPane.showMessageDialog(null, "Error borrando el registro especificado");
         }
     }
-    boolean existe(String table_name, String ID)
+    boolean existe(String ID)
     {
     	boolean exists=false;
     	

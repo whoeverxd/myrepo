@@ -75,7 +75,7 @@ javax.swing.JLabel jLabel2;
 	   javax.swing.JTextField jTextField8;
 	     javax.swing.JTextField jTextField9;
 	 public static MySql db;
-	 
+	   boolean exito; 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -145,6 +145,11 @@ javax.swing.JLabel jLabel2;
 			opcion1();
 		
 		}
+                if(e.getSource()==jButton1)
+                {
+                db.insertData(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText());//hace el query a la base de datos
+                jButton1.setEnabled(false);
+                }
                 if(e.getSource()==consultageneral)
                 {
                     consultageneral();
@@ -155,11 +160,7 @@ javax.swing.JLabel jLabel2;
                 }
                 
                 
-                if (e.getSource()==consulta)
-                {
                 
-                
-                }
                 if(e.getSource()==eliminar)
 		{
 			eliminar();
@@ -167,7 +168,7 @@ javax.swing.JLabel jLabel2;
 		}
 		if(e.getSource()==boton)
                 {
-                    if(!db.existe("datosfcaiceo",jTextField1.getText()) && !jTextField1.getText().isEmpty())
+                    if(!db.existe(jTextField1.getText()) && !jTextField1.getText().isEmpty())
 	        		{
 	        			
 	        			jTextField2.setVisible(true);
@@ -193,7 +194,7 @@ javax.swing.JLabel jLabel2;
                    
                    jTextField2.setEditable(false);
                    jTextField3.setEditable(false);
-                   
+                   exito=this.db.modificar(jTextField1.getText(),jTextField2.getText(),jTextField3.getText());
                    
                  changed.setVisible(true);
                    }
@@ -213,7 +214,7 @@ javax.swing.JLabel jLabel2;
 			
 			setContentPane(contentPane);
 			 setBounds(100,100,800,600);
-		
+                         db.SelectData();
 		}
 		if(e.getSource()==modificar)
 		{
@@ -225,12 +226,12 @@ javax.swing.JLabel jLabel2;
 		{
 			if(jCheckBox3.isSelected())
 			{
-				indefinido=0;
+			
 				jTextField8.setText(""+ingresomen*12);
 				jButton1.setEnabled(true);
 			}
 			else{
-				indefinido=1;
+				
 			
 				
 			}
@@ -240,13 +241,13 @@ javax.swing.JLabel jLabel2;
 		{
 			if(jCheckBox2.isSelected())
 			{
-				mensual=0;
+				
 				jTextField6.setEnabled(true);
 				
 			}
 			else{
 				System.out.println("false");
-				mensual=1;
+				
 				jTextField6.setEnabled(false);
 				
 				
@@ -257,13 +258,13 @@ javax.swing.JLabel jLabel2;
 		{
 			if(jCheckBox1.isSelected())
 			{
-				mensual=0;
+				
 				jComboBox1.setEnabled(true);
 				
 			}
 			else{
 				System.out.println("false");
-				mensual=1;
+				
 				jComboBox1.setEnabled(false);
 				
 				
@@ -320,12 +321,28 @@ javax.swing.JLabel jLabel2;
 		
 		setContentPane(actual);
 	
-		error=sexo=mensual=indefinido=cuenta=-1;
+		
 		 jTextField1 = new javax.swing.JTextField();
 		  JButton btnCheck = new JButton("Validate fields");
 		  btnCheck.setBounds(400,150,50,30);
 	        btnCheck.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent arg0) {
+	        	public void actionPerformed(ActionEvent arg0)
+                        
+                        {
+                        if(!jTextField4.getText().isEmpty() && !jTextField3.getText().isEmpty() && jTextField2.getText().isEmpty())
+	        	{
+	        		
+	        		if(!db.existe(jTextField1.getText())){
+	        		
+	        		if(jRadioButton2.isSelected()||jRadioButton1.isSelected())
+                                {
+                                    
+	        		jCheckBox1.setEnabled(true);
+					jCheckBox2.setEnabled(true);
+					jCheckBox3.setEnabled(true);
+	        		}
+                                }
+	        	}	        
 	        	}
 	        });
 
@@ -337,76 +354,32 @@ javax.swing.JLabel jLabel2;
 	        	@Override
 	        	public void focusLost(FocusEvent e) {
 	        		
-	        		if(!db.existe("datosfcaiceo",jTextField1.getText()) && !jTextField1.getText().isEmpty())
+	        		if(!db.existe(jTextField1.getText()) && !jTextField1.getText().isEmpty())
 	        		{
-	        			
+	        	
+	        		
+	        		jTextField2.setEditable(true);
+	        		jTextField1.setEditable(false);
+	        	
+	        		}else
+                                {
+                                jTextField2.setEditable(false);
+                                
+                                }
+                                     
+	        	}
+	        });		
 	 
-	        		error=0;
-	        		jTextField2.setEnabled(true);
-	        		
-	        	
-	        		}
-	        	}
-	        });
 	        jTextField2 = new javax.swing.JTextField();
-	        jTextField2.setEnabled(false);
-	  	  jTextField2.addFocusListener(new FocusAdapter() {
-	        	@Override
-	        	public void focusLost(FocusEvent e) 
-	        	{
-	        	if(!jTextField2.getText().isEmpty()&&jTextField2.getText()!="ERROR")
-	        	{
-	        		cuenta=cuenta+1;
-	        		jTextField3.setEnabled(true);
-	        		
-	        	
-	        		
-	        	}else
-	        	{
-	        		jTextField3.setText("ERROR");
-	        	}		
-	        		
-	        	}
-	        });
+	       
+	  	
 	      
 	        jTextField3 = new JTextField();
-	        jTextField3.setEnabled(false);
-	        jTextField3.addFocusListener(new FocusAdapter() {
-	        	@Override
-	        	public void focusLost(FocusEvent e) 
-	        	{
-	        	if(!jTextField3.getText().isEmpty()&& jTextField3.getText()!="ERROR")
-	        	{
-	        	
-	        		jTextField4.setEnabled(true);
-	        	}else
-	        	{
-	        		jTextField3.setText("ERROR");
-	        	}	
-	        		
-	        	}
-	        });
+	      
+	       
       jTextField4 = new JTextField();
-      jTextField4.setEnabled(false);
-	        jTextField4.addFocusListener(new FocusAdapter() {
-	        	@Override
-	        	public void focusLost(FocusEvent e) 
-	        	{
-	        	if(!jTextField4.getText().isEmpty())
-	        	{
-	        		cuenta=cuenta+1;
-	        		ingresomen= Integer.parseInt(jTextField4.getText());
-	        		
-	        		if(jRadioButton2.isSelected()||jRadioButton1.isSelected()){
-	        		jCheckBox1.setEnabled(true);
-					jCheckBox2.setEnabled(true);
-					jCheckBox3.setEnabled(true);
-	        		}
-	        	}	
-	        		
-	        	}
-	        });
-	        
+      jTextField4.setEditable(false);
+	
 	        
 
 	        jCheckBox1 = new JCheckBox();
@@ -446,7 +419,7 @@ javax.swing.JLabel jLabel2;
 	        		if(!jTextField4.getText().isEmpty())
 		        	{
 	        			int aux= Integer.parseInt(jTextField6.getText());
-		        		cuenta=cuenta+1;
+		        		
 		        		jTextField5.setText(""+(ingresomen - aux ) );
 		        		
 		        		
@@ -465,7 +438,7 @@ javax.swing.JLabel jLabel2;
 	        jTextField5 = new javax.swing.JTextField();
 	        jLabel13 = new javax.swing.JLabel();
 	        jTextField7 = new javax.swing.JTextField();
-	        
+	        jButton1.addActionListener(this);
 	        jTextField7.setEditable(false);
 	        jLabel14 = new javax.swing.JLabel();
 	        jTextField9 = new javax.swing.JTextField();
@@ -693,7 +666,7 @@ javax.swing.JLabel jLabel2;
 	
 	public void modificar()
 	{
-      
+              exito = false;
 		repaint();
 		actual=new JPanel();
 		setContentPane(actual);
@@ -753,7 +726,7 @@ javax.swing.JLabel jLabel2;
         
         void eliminar()
         {
-        repaint();
+                repaint();
 		actual=new JPanel();
 		setContentPane(actual);
 		actual.setLayout(null);
@@ -786,6 +759,8 @@ javax.swing.JLabel jLabel2;
                 {
                 if(!jTextField1.getText().isEmpty())
                     jTextField1.setEditable(false);
+                System.out.println( jTextField1.getText());
+                db.deleteRecord(jTextField1.getText());
                 }
             
             }
