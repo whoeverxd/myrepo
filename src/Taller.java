@@ -219,8 +219,7 @@ javax.swing.JLabel jLabel2;
 			
 			setContentPane(contentPane);
 			 setBounds(100,100,800,600);
-                         db.SelectData();
-		}
+                }       
 		if(e.getSource()==modificar)
 		{
 			
@@ -803,16 +802,10 @@ javax.swing.JLabel jLabel2;
             if(e.getSource()==boton)
                 {
                 actual.remove(boton);
-              
-                JScrollPane scrollPane = new JScrollPane();
-	        scrollPane.setBounds(30, 50, 700, 500);
-                actual.add(scrollPane);
-                JTable  rightTable = new JTable();
-	        rightTable.setBackground(new Color(0, 204, 204));
-                scrollPane.setColumnHeaderView(rightTable);
-	        setupTable(rightTable);
-                populate(rightTable);
-                
+                prueba p;
+                p=new prueba();
+                actual.add(p);
+                db.SelectData((DefaultTableModel) p.leftTable.getModel());
                 
                 
                 

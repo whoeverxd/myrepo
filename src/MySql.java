@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
     public class MySql {
         
@@ -59,7 +61,7 @@ import javax.swing.JOptionPane;
         }
       
 
-       public void SelectData()
+       public void SelectData(DefaultTableModel model )
       {
             try
             {
@@ -71,7 +73,8 @@ import javax.swing.JOptionPane;
                 {
                     int rut = rs.getInt("rut");
                     String nombre = rs.getString("nombre"); //aqui solo mando a escribir las dos primeras columnas
-                    System.out.format("%s, %s\n",rut, nombre);
+                    String apellido= rs.getString("apellido");
+                    model.addRow(new Object[]{rut,nombre,apellido, "hola"});
                 }
                 st.close();
                 }
