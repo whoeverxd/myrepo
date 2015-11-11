@@ -60,6 +60,36 @@ import javax.swing.table.DefaultTableModel;
         }
         }
       
+      
+      public void buscar(String columna , String buscado , DefaultTableModel model )
+      {
+      
+       try
+            {
+                String query = "SELECT * FROM "+table_name + " WHERE "+ columna + " = " +"\"" + buscado + "\" "+";";
+                Statement st = conexion.createStatement();
+                System.out.println(query);
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next())
+                {
+                    String rut = rs.getString("rut");
+                    String nombre = rs.getString("nombre"); //aqui solo mando a escribir las dos primeras columnas
+                    String apellido= rs.getString("apellido");
+                    int Salario=rs.getInt("SALARIO");
+                    model.addRow(new Object[]{rut,nombre,apellido,Salario});
+                }
+                st.close();
+                }
+            catch (Exception e)
+            {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
+      
+      
+      
+      
+      }
 
        public void SelectData(DefaultTableModel model )
       {
@@ -71,10 +101,11 @@ import javax.swing.table.DefaultTableModel;
                 ResultSet rs = st.executeQuery(query);
                 while (rs.next())
                 {
-                    int rut = rs.getInt("rut");
+                    String rut = rs.getString("rut");
                     String nombre = rs.getString("nombre"); //aqui solo mando a escribir las dos primeras columnas
                     String apellido= rs.getString("apellido");
-                    model.addRow(new Object[]{rut,nombre,apellido, "hola"});
+                    int Salario=rs.getInt("SALARIO");
+                    model.addRow(new Object[]{rut,nombre,apellido,Salario});
                 }
                 st.close();
                 }

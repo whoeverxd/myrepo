@@ -162,22 +162,6 @@ public class prueba extends JPanel
 	        
 	    }
 
-	    @Override
-	    public Class<?> getColumnClass(int columnIndex) {
-
-	        Class clazz = String.class;
-
-	        switch (columnIndex) {
-
-	            case 2:
-	                clazz = Color.class;
-	                break;
-
-	        }
-
-	        return clazz;
-
-	    }
-
+	  
 	}
 }

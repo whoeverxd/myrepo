@@ -886,7 +886,16 @@ javax.swing.JLabel jLabel2;
                 {
                     jTextField1.setEditable(false);
                      jTextField3.setEditable(false);
-                     
+                     remove(boton);
+                     prueba p = new prueba();
+                   actual=new JPanel();
+                    setContentPane(actual);
+                    actual.setLayout(null);
+                   actual.add(p);
+                    repaint();
+                    setVisible(true);
+                    add(volver);
+                    db.buscar(jTextField1.getText() ,jTextField3.getText(), (DefaultTableModel) p.leftTable.getModel());
                 }
                 }
             
