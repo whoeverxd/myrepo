@@ -329,14 +329,16 @@ javax.swing.JLabel jLabel2;
 	        	public void actionPerformed(ActionEvent arg0)
                         
                         {
-                        if(!jTextField4.getText().isEmpty() && !jTextField3.getText().isEmpty() && jTextField2.getText().isEmpty())
+                            System.out.println("entro el evento");
+                        if(!jTextField4.getText().isEmpty() && !jTextField3.getText().isEmpty() && !jTextField2.getText().isEmpty())
 	        	{
-	        		
-	        		if(!db.existe(jTextField1.getText())){
+	        		System.out.println("no son vacios");
+	        		if(!db.existe(jTextField1.getText()))
+                                {
 	        		
 	        		if(jRadioButton2.isSelected()||jRadioButton1.isSelected())
                                 {
-                                    
+                                    ingresomen=Integer.parseInt(jTextField4.getText());
 	        		jCheckBox1.setEnabled(true);
 					jCheckBox2.setEnabled(true);
 					jCheckBox3.setEnabled(true);
@@ -347,7 +349,6 @@ javax.swing.JLabel jLabel2;
 	        });
 
 		 actual.add(btnCheck);
-		
 			  
 			  
 	        jTextField1.addFocusListener(new FocusAdapter() {
@@ -378,7 +379,7 @@ javax.swing.JLabel jLabel2;
 	      
 	       
       jTextField4 = new JTextField();
-      jTextField4.setEditable(false);
+
 	
 	        
 
