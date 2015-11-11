@@ -147,7 +147,25 @@ javax.swing.JLabel jLabel2;
 		}
                 if(e.getSource()==jButton1)
                 {
-                db.insertData(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText());//hace el query a la base de datos
+                    char sexo;
+                    
+                    if(jRadioButton1.isSelected())
+                    {
+                    sexo='H';
+                    
+                    }else
+                    {
+                    sexo='M';
+                    }
+                    
+                   int gastos; int restante;int ahorro ; int gananciaA; int ahorroA;
+                   gastos=Integer.parseInt(jTextField5.getText());
+                   restante=Integer.parseInt(jTextField6.getText());
+                   ahorro=Integer.parseInt(jTextField7.getText());
+                   gananciaA=Integer.parseInt(jTextField8.getText());
+                   ahorroA=Integer.parseInt(jTextField9.getText());
+                    
+                db.insertData(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText(),sexo,gastos,restante,ahorro,gananciaA,ahorroA);//hace el query a la base de datos
                 jButton1.setEnabled(false);
                 }
                 if(e.getSource()==consultageneral)

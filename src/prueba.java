@@ -159,6 +159,12 @@ public class prueba extends JPanel
 	        addColumn("NOMBRE");
 	        addColumn("APELLIDO");
                 addColumn("SALARIO");
+                addColumn("SEXO");
+                addColumn("TOTAL_GASTOS");
+                addColumn("RESTANTE_GASTOS");
+                addColumn("MONTO_AHORRO");
+                addColumn("RESULTADO_SA");
+                 addColumn("RESULTADO_AHORRO_ANUAL");
 	        
 	    }
 

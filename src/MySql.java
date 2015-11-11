@@ -41,15 +41,22 @@ import javax.swing.table.DefaultTableModel;
             System.out.println("Conexion off");
         }
    
-      public void insertData(String rut, String name , String apellido,String salario )
-      {
+      public void insertData(String rut, String name , String apellido,String salario,char sexo,int gastos, int restante,int ahorro , int gananciaA, int ahorroA)
+     {
           System.out.println("entro");
         try {
             String Query = "INSERT INTO " + table_name + " VALUES("
                     + "\"" + rut + "\", "
                     + "\"" + name + "\", "
                     + "\"" + apellido + "\", "
-                     + "\"" + Integer.parseInt(salario) + "\");";
+                     + "\"" + Integer.parseInt(salario)+"\", "
+                     + "\"" + sexo + "\", "
+                     + "\"" + gastos+ "\", "
+                     + "\"" + restante + "\", "
+                     + "\"" + ahorro + "\", "
+                     + "\"" + gananciaA + "\", "
+                     + "\"" + ahorroA      
+                    + "\");";
             System.out.println(Query);
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
@@ -76,7 +83,13 @@ import javax.swing.table.DefaultTableModel;
                     String nombre = rs.getString("nombre"); //aqui solo mando a escribir las dos primeras columnas
                     String apellido= rs.getString("apellido");
                     int Salario=rs.getInt("SALARIO");
-                    model.addRow(new Object[]{rut,nombre,apellido,Salario});
+                    String sexo=rs.getString("sexo");
+                    int gastos=rs.getInt("total_gastos");      
+                    int restante=rs.getInt("Restante_gastos");
+                    int ahorro=rs.getInt("monto_ahorro");
+                    int gananciaA=rs.getInt("Resultado_sa");
+                     int ahorroA=rs.getInt("resultado_ahorro_anual");
+                    model.addRow(new Object[]{rut,nombre,apellido,Salario,sexo,gastos,restante,ahorro,gananciaA,ahorroA});
                 }
                 st.close();
                 }
@@ -101,11 +114,17 @@ import javax.swing.table.DefaultTableModel;
                 ResultSet rs = st.executeQuery(query);
                 while (rs.next())
                 {
-                    String rut = rs.getString("rut");
+                  String rut = rs.getString("rut");
                     String nombre = rs.getString("nombre"); //aqui solo mando a escribir las dos primeras columnas
                     String apellido= rs.getString("apellido");
                     int Salario=rs.getInt("SALARIO");
-                    model.addRow(new Object[]{rut,nombre,apellido,Salario});
+                    String sexo=rs.getString("sexo");
+                    int gastos=rs.getInt("total_gastos");      
+                    int restante=rs.getInt("Restante_gastos");
+                    int ahorro=rs.getInt("monto_ahorro");
+                    int gananciaA=rs.getInt("Resultado_sa");
+                     int ahorroA=rs.getInt("resultado_ahorro_anual");
+                    model.addRow(new Object[]{rut,nombre,apellido,Salario,sexo,gastos,restante,ahorro,gananciaA,ahorroA});
                 }
                 st.close();
                 }
