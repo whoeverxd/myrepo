@@ -168,7 +168,7 @@ javax.swing.JLabel jLabel2;
 		}
 		if(e.getSource()==boton)
                 {
-                    if(!db.existe(jTextField1.getText()) && !jTextField1.getText().isEmpty())
+                    if(db.existe(jTextField1.getText()) && !jTextField1.getText().isEmpty())
 	        		{
 	        			
 	        			jTextField2.setVisible(true);
@@ -195,8 +195,13 @@ javax.swing.JLabel jLabel2;
                    jTextField2.setEditable(false);
                    jTextField3.setEditable(false);
                    exito=this.db.modificar(jTextField1.getText(),jTextField2.getText(),jTextField3.getText());
-                   
-                 changed.setVisible(true);
+                   if(exito){
+                    changed.setVisible(true);
+                   }else
+                   {
+                   System.out.println("no se pudo");    
+                       
+                   }
                    }
                 
                 }
@@ -695,7 +700,7 @@ javax.swing.JLabel jLabel2;
                 jLabel2.setVisible(false);
                 jTextField1.addFocusListener(new FocusAdapter() {
 	        	@Override
-	        	public void focusGained(FocusEvent e) { /*********************aca se hace el delete******************************/
+	        	public void focusGained(FocusEvent e) { /*********************aca se hace el modif******************************/
 	        		jLabel2.setVisible(false);
 	        		
 	        	}

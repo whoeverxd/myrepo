@@ -86,7 +86,8 @@ import javax.swing.JOptionPane;
         boolean exito=false;
         try
         {
-            String query = "UPDATE  persona set "+campo+"="+nuevo+" where rut="+rut;
+            String query = "UPDATE  datosfcaiceo set "+campo+" = "+ "\"" + nuevo + "\" " + " where rut = "+"\"" + rut + "\" "+";";
+            System.out.print(query);
             Statement st = conexion.createStatement();
             int cantidad = st.executeUpdate(query);
             if (cantidad==1) {
